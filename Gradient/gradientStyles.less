@@ -1,18 +1,10 @@
 //Colors
 @black: #333;
 
-body{
-  margin: 0;
+html{
+  background: rgba(0.3,0.3,0.3,0.7)
 }
-#navigation{
-  position: absolute;
-  transition: 1s ease;
-
-  &.sticky{
-    position:fixed;
-  }
-}
-/*navbar{
+navbar{
   display:flex;
   position: sticky;
   width:20%;
@@ -37,8 +29,22 @@ body{
     }
     }
   }
-}*/
+}
 
-#hero{
-  background: grey;
+#root{
+
+  background: cyan;
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .row{
+    width: 200px;
+    display: flex;
+
+  }
+  div{
+    width:2px;
+    height:2px;
+  }
 }
