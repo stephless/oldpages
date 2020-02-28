@@ -1,6 +1,14 @@
 var url = 'ShSp.json'
 var api_root = document.getElementById('nav_shsp')
+var shsp_api_root = document.getElementById('nav_shsp_api')
+//The proxy URL is what allows the API connection to work properly.
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
+// Stephem Leslie Art API
+//var shspurl = "https://api.sharpspring.com/pubapi/v1.2/?accountID=CFA994835AABB98EF1FEA6582EE1749A&secretKey=8DC79D4D83E7A81B0D27E5159688C877"
+
+//Cat Scraps API
+var shspurl = "https://api.sharpspring.com/pubapi/v1.2/?accountID=02852F671C96233B05556178F6EEC82D&secretKey=A86616190E6F9F5D259D4CE67000FD66"
 fetch(url)
   .then((response) => {
     return response.json();
@@ -9,13 +17,13 @@ fetch(url)
     var leads = items.result.lead
     console.log(leads)
     leads.forEach((obj, i) => {
-      const h1 = document.createElement('h1')
       const h2 = document.createElement('h2')
-      h1.textContent = leads[i].firstName + " " + leads[i].lastName
-      h2.textContent = leads[i].emailAddress
+      const h3 = document.createElement('h3')
+      h2.textContent = leads[i].firstName + " " + leads[i].lastName
+      h3.textContent = leads[i].emailAddress
 
-      api_root.appendChild(h1);
       api_root.appendChild(h2);
+      api_root.appendChild(h3);
     });
   });
 
@@ -34,25 +42,42 @@ fetch(url)
     redirect: 'follow'
   };
 
-var shspurl = "https://api.sharpspring.com/pubapi/v1.2/?accountID=CFA994835AABB98EF1FEA6582EE1749A&secretKey=8DC79D4D83E7A81B0D27E5159688C877"
-var data = JSON.stringify({"method":"getLeads","params":{"where":"null"},"id":"222222222222"});
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("method", "getLeads");
+myHeaders.append("params", "");
+myHeaders.append("ID", "123123");
 
-var xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
+var raw = JSON.stringify({"method":"getLeads","params":{"where":"null"},"id":"222222222222"});
 
-xhr.addEventListener("readystatechange", function() {
-  if(this.readyState === 4) {
-    console.log(this.responseText);
-  }
-});
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+var load = document.createElement('p')
+load.innerHTML = "loading"
+shsp_api_root.appendChild(load)
+fetch(proxyurl + shspurl, requestOptions)
+  .then(response => response.text())
+  .then((result) => {
+    shsp_api_root.removeChild(load)
+    var data = JSON.parse(result)
+    var leads = data.result.lead
+    console.log(leads)
+    leads.forEach((obj, i) => {
+      const h2 = document.createElement('h2')
+      const h3 = document.createElement('h3')
+      h2.textContent = leads[i].firstName + " " + leads[i].lastName
+      h3.textContent = leads[i].emailAddress
 
-xhr.open("POST", "https://api.sharpspring.com/pubapi/v1.2/");
-xhr.setRequestHeader("Content-Type", "application/json");
-xhr.setRequestHeader("method", "getLeads");
-xhr.setRequestHeader("params", "");
-xhr.setRequestHeader("ID", "123123");
+      shsp_api_root.appendChild(h2);
+      shsp_api_root.appendChild(h3);
+    })
 
-xhr.send(data);
+  })
+  .catch(error => console.log('error', error));
 
 
 

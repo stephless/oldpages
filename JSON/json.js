@@ -8,12 +8,12 @@ fetch(url)
   })
   .then((items) => {
     items.forEach((movie, i) => {
-      const h1 = document.createElement('h1')
       const h2 = document.createElement('h2')
-      h1.textContent = items[i].first_name + " " + items[i].last_name
-      h2.textContent = items[i].title
-      root.appendChild(h1);
+      const h3 = document.createElement('h3')
+      h2.textContent = items[i].first_name + " " + items[i].last_name
+      h3.textContent = items[i].title
       root.appendChild(h2);
+      root.appendChild(h3);
     });
 
 
