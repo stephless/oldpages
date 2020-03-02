@@ -15,13 +15,13 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-var load = document.createElement('p')
-load.innerHTML = "LOADING"
-campaignRoot.appendChild(load)
+var cload = document.createElement('p')
+cload.innerHTML = "LOADING"
+campaignRoot.appendChild(cload)
 fetch(proxyurl + shspurl, requestOptions)
   .then(response => response.text())
   .then(result => {
-    campaignRoot.removeChild(load)
+    campaignRoot.removeChild(cload)
     var cmpnData = JSON.parse(result)
     var campaign = cmpnData.result.opportunity
 
