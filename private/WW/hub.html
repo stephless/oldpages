@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet/less" type="text/css" href="wwStyles.less" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
+<link rel="stylesheet" type="text/css" href="../slick/slick.css">
+<link rel="stylesheet" type="text/css" href="../slick/slick-theme.css">
+
+<style type="text/css">
+
+  .slick-slide img {
+    width: 100%;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: black;
+  }
+
+
+  .slick-slide {
+    transition: all ease-in-out .3s;
+    opacity: .2;
+  }
+
+  .slick-active {
+    opacity: .5;
+  }
+
+  .slick-current {
+    opacity: 1;
+  }
+  .draggable{
+    outline: none;
+  }
+  .slick-slider{
+    padding: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>~ WIZARDS & WORKFLOWS ~</h1>
+<ul>
+  <li><a href="cc.html">Create a character</a></li>
+<li><a href="dm.html">Dungeon Master Portal</a></li>
+</ul>
+<div id="wwRoot">
+  <div id="dmRoot"></div>
+  <div id="ccRoot" class="single-item slider"></div>
+</div>
+  <div id="campaignRoot">THE CAMPAIGN SO FAR</div>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script src="../slick/slick.js" type="text/javascript"
+charset="utf-8"></script>
+<script type="text/javascript">
+  $(document).on('ready', function()
+  {
+    $('.single-item').slick();
+  });
+</script>
+  <script src="wwCharacterCall.js"></script>
+  <script src="wwCampaignCall.js"></script>
+</body>
